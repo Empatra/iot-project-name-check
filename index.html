@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>IOT Project: Name Check</title>
+</head>
+<body>
+    <h1>IOT Project: Name Check</h1>
+    <table border="1">
+        <tr>
+            <th>Number</th>
+            <th>Name</th>
+            <th>Student ID</th>
+            <th>Time</th>
+        </tr>
+        <tbody id="data-table"></tbody>
+    </table>
+
+    <p id="name"></p>
+    <p id="student-id"></p>
+    <p id="url"></p>
+
+    <script>
+        // Function to fetch data from the API
+        function fetchData() {
+            fetch("https://api.example.com/messages") // Replace with your API endpoint
+                .then(response => response.json())
+                .then(data => {
+                    var table = document.getElementById("data-table");
+                    var row = table.insertRow(1); // Add to the top of the table
+                    for (var i = 0; i < 4; i++) {
+                        var cell = row.insertCell(i);
+                        cell.innerHTML = data[i];
+                    }
+
+                    if (data.indexOf("Pat Remon") !== -1) {
+                        document.getElementById("name").innerHTML = "Pat Remon";
+                        document.getElementById("student-id").innerHTML = "676282";
+                    }
+                })
+                .catch(error => console.error(error));
+        }
+
+        // Call the fetchData function to fetch data
+        fetchData();
+    </script>
+</body>
+</html>
